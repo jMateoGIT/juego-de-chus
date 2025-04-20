@@ -174,7 +174,7 @@ function updateTurnInfo() {
 }
 
 
-const diceAudio = new Audio("assets/dice.mp3");
+const diceAudio = new Audio("dice.mp3");
 
 function rollDice() {
   diceAudio.play();
