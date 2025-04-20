@@ -46,7 +46,36 @@ for (let i = 2; i <= 6; i++) {
 numPlayersSelect.value = 2;
 numPlayersSelect.addEventListener("change", updateNameInputs);
 
+
 function updateNameInputs() {
+  playerNamesDiv.innerHTML = "";
+  const num = parseInt(numPlayersSelect.value);
+  const avatarOptions = ["🐱", "🐶", "🐵", "🐸", "🦊", "🐯"];
+  for (let i = 0; i < num; i++) {
+    const container = document.createElement("div");
+    container.style.marginBottom = "10px";
+    container.style.display = "flex";
+    container.style.alignItems = "center";
+    container.style.gap = "10px";
+
+    const input = document.createElement("input");
+    input.placeholder = "Jugador " + (i + 1);
+    input.style.flex = "1";
+
+    const select = document.createElement("select");
+    avatarOptions.forEach(emoji => {
+      const opt = document.createElement("option");
+      opt.value = emoji;
+      opt.textContent = emoji;
+      select.appendChild(opt);
+    });
+
+    container.appendChild(input);
+    container.appendChild(select);
+    playerNamesDiv.appendChild(container);
+  }
+}
+
   playerNamesDiv.innerHTML = "";
   const num = parseInt(numPlayersSelect.value);
   
