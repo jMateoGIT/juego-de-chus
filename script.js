@@ -23,6 +23,19 @@ let retos = [
   "Pide perdón al aire por algo absurdo."
 ];
 
+const escaleras = {
+  3: 22,
+  5: 8,
+  11: 26,
+  20: 29
+};
+
+const serpientes = {
+  27: 1,
+  21: 9,
+  17: 4
+};
+
 for (let i = 2; i <= 6; i++) {
   const opt = document.createElement("option");
   opt.value = i;
@@ -31,9 +44,7 @@ for (let i = 2; i <= 6; i++) {
 }
 
 numPlayersSelect.value = 2;
-numPlayersSelect.addEventListener("change", () => {
-  updateNameInputs();
-});
+numPlayersSelect.addEventListener("change", updateNameInputs);
 
 function updateNameInputs() {
   playerNamesDiv.innerHTML = "";
@@ -62,6 +73,23 @@ function drawBoard() {
     const cell = document.createElement("div");
     cell.className = "cell";
     cell.innerText = i;
+
+    // Dibujar escaleras
+    if (escaleras[i]) {
+      const span = document.createElement("span");
+      span.innerText = "⬆";
+      span.style.color = "green";
+      cell.appendChild(span);
+    }
+
+    // Dibujar serpientes
+    if (Object.values(serpientes).includes(i)) {
+      const span = document.createElement("span");
+      span.innerText = "⬇";
+      span.style.color = "red";
+      cell.appendChild(span);
+    }
+
     board.appendChild(cell);
   }
   updatePlayerPositions();
@@ -84,21 +112,29 @@ function updateTurnInfo() {
 }
 
 function rollDice() {
-  const roll = Math.floor(Math.random() * 6) + 1;
-  diceResult.innerText = "Has sacado un " + roll;
+  diceResult.innerText = "Tirando...";
+  let roll = 1;
+  let count = 0;
+  const interval = setInterval(() => {
+    roll = Math.floor(Math.random() * 6) + 1;
+    diceResult.innerText = "🎲 " + roll;
+    count++;
+    if (count > 10) {
+      clearInterval(interval);
+      finalizeRoll(roll);
+    }
+  }, 100);
+}
+
+function finalizeRoll(roll) {
   positions[currentPlayer] += roll;
   if (positions[currentPlayer] > 100) positions[currentPlayer] = 100;
 
-  // Escaleras
-  if (positions[currentPlayer] === 3) positions[currentPlayer] = 22;
-  if (positions[currentPlayer] === 5) positions[currentPlayer] = 8;
-  if (positions[currentPlayer] === 11) positions[currentPlayer] = 26;
-  if (positions[currentPlayer] === 20) positions[currentPlayer] = 29;
-
-  // Serpientes
-  if (positions[currentPlayer] === 27) positions[currentPlayer] = 1;
-  if (positions[currentPlayer] === 21) positions[currentPlayer] = 9;
-  if (positions[currentPlayer] === 17) positions[currentPlayer] = 4;
+  if (escaleras[positions[currentPlayer]]) {
+    positions[currentPlayer] = escaleras[positions[currentPlayer]];
+  } else if (serpientes[positions[currentPlayer]]) {
+    positions[currentPlayer] = serpientes[positions[currentPlayer]];
+  }
 
   drawBoard();
   showChallenge(positions[currentPlayer]);
