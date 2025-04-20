@@ -1,0 +1,39 @@
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #fafafa;
+}
+
+.hidden {
+  display: none;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  margin: 20px auto;
+  gap: 2px;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  position: relative;
+}
+
+.player {
+  position: absolute;
+  font-size: 10px;
+}
+
+#controls {
+  margin-top: 20px;
+}

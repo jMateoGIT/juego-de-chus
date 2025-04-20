@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Juego de Chus</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>🎲 El Juego de Chus</h1>
+  <div id="player-setup">
+    <label for="numPlayers">Número de jugadores:</label>
+    <select id="numPlayers"></select>
+    <div id="player-names"></div>
+    <button onclick="startGame()">¡Empezar!</button>
+  </div>
+  <div id="game-board" class="hidden">
+    <div id="board"></div>
+    <div id="controls">
+      <p id="turn-info"></p>
+      <button onclick="rollDice()">Tirar dado 🎲</button>
+      <p id="dice-result"></p>
+    </div>
+  </div>
+  <div id="challenge" class="hidden"></div>
+  <script src="script.js"></script>
+</body>
+</html>
