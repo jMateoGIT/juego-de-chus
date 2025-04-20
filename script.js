@@ -164,7 +164,9 @@ function updatePlayerPositions() {
     const cellIndex = 100 - pos;
     const marker = document.createElement("div");
     marker.className = "player";
-    marker.innerText = players[idx].avatar;
+    
+  marker.innerHTML = "<div>" + players[idx].avatar + "</div><div style='font-size:9px'>" + players[idx].name + "</div>";
+
     cells[cellIndex].appendChild(marker);
   });
 }
@@ -174,7 +176,7 @@ function updateTurnInfo() {
 }
 
 
-const diceAudio = new Audio("dice.mp3");
+const diceAudio = new Audio("assets/dice.mp3");
 
 function rollDice() {
   diceAudio.play();
