@@ -117,6 +117,11 @@ const diceAudio = new Audio("assets/dice.mp3");
 function rollDice() {
   diceAudio.play();
 
+  // Añadir animación visual
+  diceResult.classList.remove("roll-animation");
+  void diceResult.offsetWidth; // Truco para reiniciar animación
+  diceResult.classList.add("roll-animation");
+
   diceResult.innerText = "Tirando...";
   let roll = 1;
   let count = 0;
@@ -130,6 +135,7 @@ function rollDice() {
     }
   }, 100);
 }
+
 
 function finalizeRoll(roll) {
   positions[currentPlayer] += roll;
