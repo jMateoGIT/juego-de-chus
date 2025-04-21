@@ -1,7 +1,6 @@
-
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #f5f5ff, #d2d2fc);
+  background: radial-gradient(circle at top, #fdf6e3, #f9d976);
   margin: 0;
   padding: 0;
   text-align: center;
@@ -10,42 +9,45 @@ body {
 
 h1 {
   margin-top: 30px;
-  font-size: 36px;
-  color: #c82121;
+  font-size: 40px;
+  color: #2d2d86;
+  text-shadow: 1px 1px #fff;
 }
 
 #player-setup, #game-board {
-  max-width: 600px;
+  max-width: 700px;
   margin: 30px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 label, select, input, button {
   font-size: 16px;
-  margin: 8px;
+  margin: 10px;
 }
 
-input {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+input, select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
 }
 
 button {
-  background-color: #c82121;
+  background-color: #2d2d86;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: transform 0.2s ease, background-color 0.3s;
+  font-weight: bold;
 }
 
 button:hover {
-  background-color: #aa1414;
+  background-color: #1f1f70;
+  transform: scale(1.05);
 }
 
 .hidden {
@@ -55,35 +57,41 @@ button:hover {
 #board {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 3px;
+  gap: 4px;
   margin: 20px 0;
 }
 
 .cell {
-  background-color: #fff;
-  border: 1px solid #bbb;
+  background-color: #fffbe6;
+  border: 2px solid #ffcc70;
   width: 100%;
   aspect-ratio: 1;
   position: relative;
-  font-size: 12px;
-  color: #555;
+  font-size: 14px;
+  color: #444;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+  animation: appearSequential 0.3s ease forwards;
 }
 
 .cell:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #fff3cc;
 }
 
 .player {
   position: absolute;
-  bottom: 2px;
-  right: 2px;
-  font-size: 10px;
-  background-color: #ffde59;
+  bottom: 4px;
+  right: 4px;
+  font-size: 12px;
+  background-color: #ff5e5e;
+  color: #fff;
   border-radius: 50%;
-  padding: 2px 5px;
+  padding: 4px 6px;
+  border: 1px solid #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
 
 #controls {
@@ -91,15 +99,16 @@ button:hover {
 }
 
 #challenge {
-  background-color: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
-  padding: 12px;
-  border-radius: 8px;
+  background-color: #fef2c0;
+  color: #795300;
+  border: 2px solid #ffd54f;
+  padding: 16px;
+  border-radius: 10px;
   margin: 20px auto;
-  max-width: 400px;
+  max-width: 450px;
+  font-weight: bold;
+  animation: fadeIn 0.5s ease-in-out;
 }
-
 
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.9); }
@@ -108,7 +117,7 @@ button:hover {
 
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+  50% { transform: scale(1.15); }
   100% { transform: scale(1); }
 }
 
@@ -117,22 +126,18 @@ button:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.cell {
-  animation: appearSequential 0.3s ease forwards;
-}
-
-#challenge {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
 .cell .highlight {
   animation: pulse 1s ease-in-out infinite;
+  border-color: #ff4081;
+  background-color: #ffeef8;
 }
 
 #turn-info span {
   font-weight: bold;
-  background: #ffd700;
-  padding: 4px 8px;
-  border-radius: 6px;
+  background: #4caf50;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
   animation: pulse 1s ease-in-out infinite;
+  box-shadow: 0 0 6px #4caf50aa;
 }
