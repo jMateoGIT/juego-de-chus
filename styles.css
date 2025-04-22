@@ -21,6 +21,8 @@ h1 {
   padding: 25px;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 label, select, input, button {
@@ -57,24 +59,81 @@ button:hover {
 
 #board {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr); /* por defecto */
   gap: 4px;
-  margin: 20px 0;
+  margin: 20px auto;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+#board-container {
+  position: relative;
+  width: 100%;
+}
+
+#board-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Tablet vertical */
+@media (max-width: 900px) {
+  #board {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Móvil ancho */
+@media (max-width: 600px) {
+  #board {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 400px) {
+  #board {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.ladder-icon, .snake-icon {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.ladder-icon {
+  color: green;
+}
+
+.snake-icon {
+  color: red;
 }
 
 .cell {
   background-color: #fffbe6;
   border: 2px solid #ffcc70;
-  width: 100%;
   aspect-ratio: 1;
-  position: relative;
-  font-size: 14px;
+  width: 95%;
+  font-size: 18px;
   color: #444;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   border-radius: 4px;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
   animation: appearSequential 0.3s ease forwards;
 }
 
@@ -83,17 +142,84 @@ button:hover {
 }
 
 .player {
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  font-size: 12px;
-  background-color: #ff5e5e;
+  font-size: 20px;
+  width: 28px;
+  height: 28px;
+  background-color: var(--color, #ff5e5e); /* usamos --color */
   color: #fff;
   border-radius: 50%;
-  padding: 4px 6px;
-  border: 1px solid #fff;
-  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  z-index: 10;
+  cursor: default;
 }
+
+/* Tooltip personalizado */
+.player::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background-color: var(--color, #333); /* usa el mismo color que la ficha */
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Flechita */
+.player::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--color, #333); /* color igual al tooltip */
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 9;
+}
+
+/* Mostrar tooltip al pasar el mouse */
+.player:hover::after,
+.player:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.bounce-inner {
+  font-size: 16px;
+  animation: none;
+}
+
+.bounce-inner.bounce {
+  animation: bounce 0.4s ease;
+}
+
+@keyframes bounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.3); }
+  60%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.corner-0 { bottom: 2px; right: 2px; }
+.corner-1 { bottom: 2px; left: 2px; }
+.corner-2 { top: 2px; right: 2px; }
+.corner-3 { top: 2px; left: 2px; }
 
 #controls {
   margin-top: 20px;
@@ -133,7 +259,7 @@ button:hover {
   background-color: #ffeef8;
 }
 
-#turn-info span {
+#turn-info {
   font-weight: bold;
   background: #4caf50;
   color: white;
@@ -141,13 +267,19 @@ button:hover {
   border-radius: 8px;
   animation: pulse 1s ease-in-out infinite;
   box-shadow: 0 0 6px #4caf50aa;
+  width: 80%;
+  display: block;
+  margin: 10px auto; /* <- Esto centra el bloque horizontalmente */
+  text-align: center; /* <- Asegura que el texto dentro también esté centrado */
 }
 
-#dice-result {
-  font-size: 32px;
-  font-weight: bold;
-  margin-top: 20px;
+
+#dice-visual {
+  font-size: 48px;
+  display: inline-block;
   transition: transform 0.3s ease;
+  margin-bottom: 10px;
+  margin-top: 0px;
 }
 
 .roll-animation {
@@ -162,3 +294,17 @@ button:hover {
   100% { transform: rotate(360deg) scale(1); }
 }
 
+#dice-result {
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.emoji-input {
+  font-size: 24px;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}

@@ -17,10 +17,14 @@
     <button onclick="startGame()">¡Empezar!</button>
   </div>
   <div id="game-board" class="hidden">
-    <div id="board"></div>
+    <div id="board-container">
+      <svg id="board-svg"></svg>
+      <div id="board"></div>
+    </div>    
     <div id="controls">
       <p id="turn-info"></p>
       <button onclick="rollDice()">Tirar dado 🎲</button>
+      <p id="dice-visual">🎲</p>
       <p id="dice-result"></p>
     </div>
   </div>
