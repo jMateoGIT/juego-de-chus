@@ -304,7 +304,7 @@ button:hover {
 
   button {
     font-size: 14px;
-    padding: 10px 18px;
+    padding: 8px 14px;
     border-radius: 8px;
   }
 
@@ -315,16 +315,16 @@ button:hover {
   }
 
   .emoji-input {
-    font-size: 20px;
+    font-size: 18px;
     padding: 4px;
   }
 
   #dice-result {
-    font-size: 32px;
+    font-size: 26px;
   }
 
   #dice-visual {
-    font-size: 36px;
+    font-size: 28px;
   }
 
   #challenge {
@@ -335,6 +335,6 @@ button:hover {
 
   #turn-info {
     font-size: 14px;
-    width: 90%;
+    width: 80%;
   }
 }
