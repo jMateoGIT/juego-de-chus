@@ -62,19 +62,26 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr)); /* ✅ importante: no se expande */
   gap: 4px;
-  margin: 20px auto; /* ✅ mantiene centrado */
+  margin: auto; /* ✅ mantiene centrado */
   width: 100%;
   max-width: 100%;
-  padding: 0 4px; /* ✅ márgenes internos */
+  padding: 0 1px; /* ✅ márgenes internos */
   box-sizing: border-box;
   position: relative;
   z-index: 1;
   overflow-x: hidden; /* ✅ protección extra */
 }
 
+@media (max-width: 600px) {
+  #player-setup,
+  #game-board {
+    padding: 10px;
+  }
+}
+
 #board-container {
   position: relative;
-  width: 100%;
+  width: auto;
 }
 
 #board-svg {
