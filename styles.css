@@ -60,6 +60,7 @@ button:hover {
 #board {
   display: grid;
   grid-template-columns: repeat(10, 1fr); /* por defecto */
+  gap: 4px;
   margin: 20px auto;
   max-width: 100%;
   width: 100%;
@@ -86,21 +87,21 @@ button:hover {
 /* Tablet vertical */
 @media (max-width: 900px) {
   #board {
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
 /* Móvil ancho */
 @media (max-width: 600px) {
   #board {
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
 /* Móvil pequeño */
 @media (max-width: 400px) {
   #board {
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -124,7 +125,7 @@ button:hover {
   background-color: #fffbe6;
   border: 2px solid #ffcc70;
   aspect-ratio: 1;
-  width: 95%;
+  width: auto;
   font-size: 18px;
   color: #444;
   display: flex;

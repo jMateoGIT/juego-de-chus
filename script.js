@@ -297,20 +297,19 @@ function drawBoard() {
     cell.innerText = i;
 
     // Dibujar escaleras
-    if (escaleras[i]) {
-      const icon = document.createElement("div");
-      icon.className = "ladder-icon";
-      icon.innerText = "🪜";
-      cell.appendChild(icon);
-    }
+    //if (escaleras[i]) {
+    //  const icon = document.createElement("div");
+    //  icon.className = "ladder-icon";
+    //  icon.innerText = "🪜";
+    //  cell.appendChild(icon);
+    //}
     // Dibujar serpientes
-    if (Object.values(serpientes).includes(i)) {
-      const icon = document.createElement("div");
-      icon.className = "snake-icon";
-      icon.innerText = "🐍";
-      cell.appendChild(icon);
-    }
-    
+    //if (Object.values(serpientes).includes(i)) {
+    //  const icon = document.createElement("div");
+    //  icon.className = "snake-icon";
+    //  icon.innerText = "🐍";
+    //  cell.appendChild(icon);
+    //}    
 
     board.appendChild(cell);
   }
