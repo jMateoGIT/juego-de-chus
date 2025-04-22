@@ -60,7 +60,6 @@ button:hover {
 #board {
   display: grid;
   grid-template-columns: repeat(10, 1fr); /* por defecto */
-  gap: 4px;
   margin: 20px auto;
   max-width: 100%;
   width: 100%;
