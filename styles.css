@@ -60,13 +60,16 @@ button:hover {
 
 #board {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* por defecto */
+  grid-template-columns: repeat(10, minmax(0, 1fr)); /* ✅ importante: no se expande */
   gap: 4px;
+  margin: 20px auto; /* ✅ mantiene centrado */
   width: 100%;
-  padding-inline: 4px;
+  max-width: 100%;
+  padding: 0 4px; /* ✅ márgenes internos */
   box-sizing: border-box;
   position: relative;
   z-index: 1;
+  overflow-x: hidden; /* ✅ protección extra */
 }
 
 #board-container {
