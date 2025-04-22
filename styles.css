@@ -5,6 +5,7 @@ body {
   padding: 0;
   text-align: center;
   color: #333;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -61,9 +62,8 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(10, 1fr); /* por defecto */
   gap: 4px;
-  margin: 20px auto;
-  max-width: 100%;
   width: 100%;
+  padding-inline: 4px;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
